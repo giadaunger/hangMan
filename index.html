@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman</title>
+
+    <script>
+
+        // Skapar en array med ord
+        const words = ['Programmering', 'Stockholm', 'Studenter', 'Javascript', 'Afterwork']
+
+        // Väljer ett random ord
+        const randomValue = Math.floor(Math.random() * words.length);
+
+        // Variabel för det varlda random ordet
+        const chosenWord = words[randomValue];
+        console.log(chosenWord)
+
+        // Omvandlar bokstäverna till "_"
+        var underscore = [];
+        for (var i = 0; i < chosenWord.length; i++) {
+            underscore[i] = "_";
+        }
+
+        let remainingLetters = chosenWord.length;
+
+        let lives = 5;
+
+
+        // Skapar en loop för att kunna gissa på en bokstav till antingen man förlorat eller vunnit
+        while (remainingLetters > 0) {
+
+            let guess = prompt(
+                "Guess a letter!" 
+                + "\n" 
+                + "You have " 
+                + lives 
+                + " left" 
+                + "\n" 
+                + underscore.join(" "));
+
+            for (var j = 0; j < chosenWord.length; j++) {
+                // När gissningen som användaren har matat in är korrekt omvandlas underscore(dvs "_") till den originella bokstaven
+                if (chosenWord[j] === guess) {
+                    underscore[j] = guess;
+                    remainingLetters--;
+                }
+                // Om användaren gissar fel subtraheras ett liv
+                else{
+                    lives--;
+                }
+            }
+        }    
+
+        // När spelet är slut skriver den ut en mening beroende på om du har vunnit eller förlorat
+        if (lives === 0) {
+            alert("You have lost! The correct word was " + chosenWord);
+        }
+
+        if (remainingLetters === 0){
+            alert("You have won, congratulations!");
+        }
+
+        //Liv
+        //uppercase
+ </script>
+</head>
+<body>
+</body>
+</html>
